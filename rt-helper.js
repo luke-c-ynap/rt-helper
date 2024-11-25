@@ -82,11 +82,6 @@
         }
     });
 
-    
-Here's the updated script with the search name included at the beginning of the prompt when the name is not found in the worklist:
-
-javascript
-Copy code
 // Script 3: Filter a worklist by a name input
 document.getElementById('runScript3').addEventListener('click', () => {
     const url = window.location.href;
