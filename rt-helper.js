@@ -24,7 +24,7 @@
 <button id="runScript4" style="margin: 0 5px; padding: 5px 5px;" title="Toggle the alignment template on Madame previews">Template</button>
 <button id="runScript5" style="margin: 0 5px; padding: 5px 5px;" title="Open the Retouch pages for all VIDs in your Madame personal area">P.A VIDs</button>
 <button id="runScript6" style="margin: 0 5px; padding: 5px 5px;" title="Open Validator pages for all the VIDs on this Madame page">Open Vals</button>
-<button id="runScript7" style="margin: 0 5px; padding: 5px 5px;" title="Refresh the Madame search results">R Search</button>
+<button id="runScript7" style="margin: 0 5px; padding: 5px 5px;" title="Refresh the Madame search results">ReSearch</button>
 
     `;
 
