@@ -9,7 +9,7 @@
     footer.style.color = 'white';
     footer.style.textAlign = 'center';
     footer.style.padding = '10px 0';
-    footer.style.zIndex = '1000';
+    footer.style.zIndex = '20000';
 
     // Add buttons to the footer
     footer.innerHTML = `
