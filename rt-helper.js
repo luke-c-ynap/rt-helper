@@ -115,7 +115,7 @@
             floatingDiv.textContent = `Filtered by: ${targetName} (click to reset)`;
             Object.assign(floatingDiv.style, {
                 position: 'fixed',
-                bottom: '50px',
+                bottom: '60px',
                 left: '50%',
                 transform: 'translateX(-50%)',
                 backgroundColor: 'yellow',
@@ -181,7 +181,7 @@
             floatingDiv.textContent = `Filtered by: ${name} (click to reset)`;
             Object.assign(floatingDiv.style, {
                 position: 'fixed',
-                bottom: '50px',
+                bottom: '60px',
                 left: '50%',
                 transform: 'translateX(-50%)',
                 backgroundColor: 'yellow',
