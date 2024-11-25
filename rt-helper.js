@@ -17,9 +17,9 @@
         <button id="runScript1" style="margin: 0 10px; padding: 5px 10px;">RT/VLDT</button>
         <button id="runScript2" style="margin: 0 10px; padding: 5px 10px;">Open Matchmaker Previews</button>
         <button id="runScript3" style="margin: 0 10px; padding: 5px 10px;">Template Overlay</button>
-        <button id="runScript4" style="margin: 0 10px; padding: 5px 10px;">Open Personal Area RT pages</button>
-        <button id="runScript5" style="margin: 0 10px; padding: 5px 10px;">Refresh Search Page</button>
-        <button id="runScript6" style="margin: 0 10px; padding: 5px 10px;">Script 6</button>
+        <button id="runScript4" style="margin: 0 10px; padding: 5px 10px;">Open Personal Area RT Pages</button>
+        <button id="runScript5" style="margin: 0 10px; padding: 5px 10px;">Refresh Search</button>
+        <button id="runScript6" style="margin: 0 10px; padding: 5px 10px;">Nuke Popups</button>
         <button id="runScript7" style="margin: 0 10px; padding: 5px 10px;">Script 7</button>
         <button id="runScript8" style="margin: 0 10px; padding: 5px 10px;">Script 8</button>
     `;
@@ -157,7 +157,7 @@
         });
     });
 
-    // Script 5: Find VID numbers and use them to search again
+    // Script 5: Refresh Search page by finding vids and re-searching
     document.getElementById('runScript5').addEventListener('click', () => {
         try {
             const spans = document.querySelectorAll('span');
@@ -183,8 +183,13 @@
         }
     });
 
+    // Script 6: Nuke Popups - Hide all Toastify popups
     document.getElementById('runScript6').addEventListener('click', () => {
-        alert('Script 6 functionality not implemented yet.');
+        document.querySelectorAll('div[class*="Toastify"]').forEach(el => {
+            el.style.setProperty('display', 'none', 'important');
+            el.style.setProperty('visibility', 'hidden', 'important');
+            el.style.setProperty('opacity', '0', 'important');
+        });
     });
 
     document.getElementById('runScript7').addEventListener('click', () => {
