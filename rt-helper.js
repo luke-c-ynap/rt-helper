@@ -1,4 +1,3 @@
-
 (function() {
     // Create the footer menu
     const footer = document.createElement('div');
@@ -16,6 +15,12 @@
     footer.innerHTML = `
         <button id="runScript1" style="margin: 0 10px; padding: 5px 10px;">RT/VLDT</button>
         <button id="runScript2" style="margin: 0 10px; padding: 5px 10px;">Open Matchmaker Previews</button>
+        <button id="runScript3" style="margin: 0 10px; padding: 5px 10px;">Template Overlay</button>
+        <button id="runScript4" style="margin: 0 10px; padding: 5px 10px;">Script 4</button>
+        <button id="runScript5" style="margin: 0 10px; padding: 5px 10px;">Script 5</button>
+        <button id="runScript6" style="margin: 0 10px; padding: 5px 10px;">Script 6</button>
+        <button id="runScript7" style="margin: 0 10px; padding: 5px 10px;">Script 7</button>
+        <button id="runScript8" style="margin: 0 10px; padding: 5px 10px;">Script 8</button>
     `;
 
     // Append the footer to the body
@@ -35,8 +40,7 @@
         }
     });
 
-
-    // Script 2: Scan the "Product ID" column and open valid IDs in new tabs
+    // Script 2: Scan the Matchmaker "Product ID" column and open valid IDs in new tabs
     document.getElementById('runScript2').addEventListener('click', () => {
         if (!window.location.href.includes('matchmaker')) {
             alert('This script runs on Matchmaker result pages.');
@@ -73,4 +77,83 @@
             });
         }
     });
+
+    // Script 3: Toggle accessory template overlay on all images
+    document.getElementById('runScript3').addEventListener('click', () => {
+        window.isActive = !window.isActive;
+        window.toggleOverlay = function() {
+            document.querySelectorAll('img[src], .panZoomImage').forEach(function(targetImage) {
+                var wrapper = targetImage.parentNode;
+                var overlayImage = wrapper.querySelector('.bookmarklet-overlay');
+
+                if (!overlayImage) {
+                    overlayImage = new Image();
+                    overlayImage.src = 'https://i.ibb.co/r3CL8MQ/Accessory-Template.png';
+                    overlayImage.classList.add('bookmarklet-overlay');
+                    overlayImage.style.position = 'absolute';
+                    overlayImage.style.top = '50%';
+                    overlayImage.style.left = '50%';
+                    overlayImage.style.transform = 'translate(-50%, -50%)';
+                    overlayImage.style.height = '100%';
+                    overlayImage.style.pointerEvents = 'none';
+                    overlayImage.style.opacity = '0';
+                    overlayImage.style.transition = 'opacity 0.3s ease';
+                    overlayImage.style.zIndex = '999999';
+                    overlayImage.style.display = 'block';
+                    if (targetImage.classList.contains('panZoomImage')) {
+                        overlayImage.style.paddingBottom = '5px';
+                    }
+                    if (getComputedStyle(wrapper).position === 'static') {
+                        wrapper.style.position = 'relative';
+                    }
+                    wrapper.appendChild(overlayImage);
+                    wrapper.addEventListener('mouseenter', function() {
+                        if (window.isActive) overlayImage.style.opacity = '1';
+                    });
+                    wrapper.addEventListener('mouseleave', function() {
+                        overlayImage.style.opacity = '0';
+                    });
+                }
+                overlayImage.style.display = window.isActive ? 'block' : 'none';
+            });
+            document.querySelectorAll('.panZoomContainer__in').forEach(function(container) {
+                container.style.pointerEvents = window.isActive ? 'auto' : 'none';
+            });
+        };
+        window.toggleOverlay();
+
+        var observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                mutation.addedNodes.forEach(function(node) {
+                    if ((node.tagName === 'IMG' && node.src) || node.classList.contains('panZoomImage')) {
+                        window.toggleOverlay();
+                    }
+                });
+            });
+        });
+
+        observer.observe(document.body, { childList: true, subtree: true });
+    });
+
+    // Placeholders for future scripts
+    document.getElementById('runScript4').addEventListener('click', () => {
+        alert('Script 4 functionality not implemented yet.');
+    });
+
+    document.getElementById('runScript5').addEventListener('click', () => {
+        alert('Script 5 functionality not implemented yet.');
+    });
+
+    document.getElementById('runScript6').addEventListener('click', () => {
+        alert('Script 6 functionality not implemented yet.');
+    });
+
+    document.getElementById('runScript7').addEventListener('click', () => {
+        alert('Script 7 functionality not implemented yet.');
+    });
+
+    document.getElementById('runScript8').addEventListener('click', () => {
+        alert('Script 8 functionality not implemented yet.');
+    });
+
 })();
