@@ -1,23 +1,23 @@
 (function() {
     // Create the footer menu
-    const footer = document.createElement('div');
-    footer.style.position = 'fixed';
-    footer.style.bottom = '0';
-    footer.style.left = '0';
-    footer.style.width = '100%';
-    footer.style.backgroundColor = '#333';
-    footer.style.color = 'white';
-    footer.style.textAlign = 'center';
-    footer.style.padding = '10px 0';
-    footer.style.zIndex = '1000';
-    footer.style.height = '50px'; // Define the footer height
-    footer.style.boxSizing = 'border-box';
+const header = document.createElement('div');
+header.style.position = 'fixed';
+header.style.top = '0'; // Position it at the top
+header.style.left = '0';
+header.style.width = '100%';
+header.style.backgroundColor = '#333';
+header.style.color = 'white';
+header.style.textAlign = 'center';
+header.style.padding = '10px 0';
+header.style.zIndex = '1000';
+header.style.height = '50px'; // Define the header height
+header.style.boxSizing = 'border-box';
 
-    // Add padding to the body to prevent content overlap
-    document.body.style.paddingBottom = footer.style.height;
+// Add padding to the body to prevent content overlap
+document.body.style.paddingTop = header.style.height; // Adjust top padding for the header
 
-    // Add buttons to the footer
-    footer.innerHTML = `
+// Add buttons to the header
+header.innerHTML = `
 <button id="runScript1" style="margin: 0 5px; padding: 5px 5px;" title="Swap between Retoucher and Validator modes in Madame">RT / VLDT</button>
 <button id="runScript2" style="margin: 0 5px; padding: 5px 5px;" title="Preview the MatchMaker PID results on Fulcrum">MM Prev</button>
 <button id="runScript3" style="margin: 0 5px; padding: 5px 5px;" title="Filter a Fulcrum/Madame worklist/search results by entering a name">Name Fil</button>
@@ -25,12 +25,12 @@
 <button id="runScript5" style="margin: 0 5px; padding: 5px 5px;" title="Open the Retouch pages for all VIDs in your Madame personal area">P.A VIDs</button>
 <button id="runScript6" style="margin: 0 5px; padding: 5px 5px;" title="Open Validator pages for all the VIDs on this Madame page">Open Vals</button>
 <button id="runScript7" style="margin: 0 5px; padding: 5px 5px;" title="Refresh the Madame search results">ReSearch</button>
-<button id="runScript7" style="margin: 0 5px; padding: 5px 5px;" title="Instantly hide all annoying Madame popups">Go away</button>
+<button id="runScript8" style="margin: 0 5px; padding: 5px 5px;" title="Hide Toastify notifications">Hide Toasts</button>
+`;
 
-    `;
+// Append the header to the body
+document.body.appendChild(header);
 
-    // Append the footer to the body
-    document.body.appendChild(footer);
 
     // Add click event listeners for the buttons
 
