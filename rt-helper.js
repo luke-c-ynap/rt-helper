@@ -14,8 +14,8 @@
 
     // Add buttons to the footer
     footer.innerHTML = `
-        <button id="runScript1" style="margin: 0 10px; padding: 5px 10px;">Toggle Retouching</button>
-        <button id="runScript2" style="margin: 0 10px; padding: 5px 10px;">Open Product Previews</button>
+        <button id="runScript1" style="margin: 0 10px; padding: 5px 10px;">RT/VLDT</button>
+        <button id="runScript2" style="margin: 0 10px; padding: 5px 10px;">Open Matchmaker Previews</button>
     `;
 
     // Append the footer to the body
@@ -31,9 +31,10 @@
         } else if (currentUrl.includes("retouching/")) {
             location.replace(currentUrl.replace("retouching/", "retouching-validation/"));
         } else {
-            alert('This script runs on pages with "retouching" or "retouching-validation" in the URL.');
+            alert('This button works on Madame Retoucher or Validator pages.');
         }
     });
+
 
     // Script 2: Scan the "Product ID" column and open valid IDs in new tabs
     document.getElementById('runScript2').addEventListener('click', () => {
