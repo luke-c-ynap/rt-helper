@@ -166,7 +166,7 @@
         floatingDiv.textContent = `${message} (click to reset)`;
         Object.assign(floatingDiv.style, {
             position: 'fixed',
-            bottom: '10px',
+            bottom: '200px',
             left: '50%',
             transform: 'translateX(-50%)',
             backgroundColor: 'yellow',
