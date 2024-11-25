@@ -75,114 +75,145 @@
 
     // Script 3: Filter a worklist by a name input
     document.getElementById('runScript3').addEventListener('click', () => {
-        const url = window.location.href;
+    var url = window.location.href;
 
-        // Ensure the correct URL
-        if (!url.includes("fulcrum") && !url.includes("madame")) {
-            alert('This script only works on Fulcrum or Madame worklist pages.');
-            return;
-        }
+    if (url.includes("fulcrum")) {
+        (function() {
+            const targetName = prompt("Please enter the filtered name:");
+            if (!targetName) return;
 
-        const targetName = prompt("Please enter the filtered name:");
-        if (!targetName) return;
+            const lowerCaseTarget = targetName.toLowerCase();
+            const rows = document.querySelectorAll('table tr[id*="row_for"]');
+            let found = false;
 
-        const lowerCaseTarget = targetName.toLowerCase();
+            const originalStates = Array.from(rows).map(row => ({
+                row,
+                display: row.style.display
+            }));
 
-        // Fulcrum worklist filtering
-        if (url.includes("fulcrum")) {
-            filterFulcrumWorklist(lowerCaseTarget);
-        }
+            rows.forEach(row => {
+                const containsTargetDiv = Array.from(row.querySelectorAll('td div')).some(div => div.title.toLowerCase().includes(lowerCaseTarget));
+                if (!containsTargetDiv) {
+                    row.style.display = 'none';
+                } else {
+                    found = true;
+                    row.style.display = '';
+                }
+            });
 
-        // Madame worklist filtering
-        else if (url.includes("madame")) {
-            filterMadameWorklist(lowerCaseTarget);
-        }
-    });
-
-    // Function to handle Fulcrum worklist filtering
-    function filterFulcrumWorklist(lowerCaseTarget) {
-        const rows = document.querySelectorAll('table tr[id*="row_for"]');
-        let found = false;
-        const originalStates = Array.from(rows).map(row => ({
-            row,
-            display: row.style.display
-        }));
-
-        rows.forEach(row => {
-            const containsTargetDiv = Array.from(row.querySelectorAll('td div')).some(div =>
-                div.title.toLowerCase().includes(lowerCaseTarget)
-            );
-            if (!containsTargetDiv) {
-                row.style.display = 'none';
-            } else {
-                found = true;
-                row.style.display = '';
+            if (!found) {
+                alert("Not found in worklist");
+                originalStates.forEach(({ row, display }) => row.style.display = display);
+                return;
             }
-        });
 
-        if (!found) {
-            alert("Not found in worklist");
-            originalStates.forEach(({ row, display }) => row.style.display = display);
-            return;
-        }
+            const floatingDiv = document.createElement('div');
+            floatingDiv.textContent = `Filtered by: ${targetName} (click to reset)`;
+            floatingDiv.style.position = 'fixed';
+            floatingDiv.style.bottom = '10px';
+            floatingDiv.style.left = '50%';
+            floatingDiv.style.transform = 'translateX(-50%)';
+            floatingDiv.style.backgroundColor = 'yellow';
+            floatingDiv.style.color = 'black';
+            floatingDiv.style.padding = '10px';
+            floatingDiv.style.borderRadius = '5px';
+            floatingDiv.style.fontSize = '16px';
+            floatingDiv.style.zIndex = '9999';
+            floatingDiv.style.cursor = 'pointer';
+            document.body.appendChild(floatingDiv);
 
-        createFloatingResetDiv("Filtered by: " + targetName, originalStates);
-    }
+            floatingDiv.addEventListener('click', () => {
+                originalStates.forEach(({ row, display }) => row.style.display = display);
+                document.body.removeChild(floatingDiv);
+            });
+        })();
+    } else if (url.includes("madame")) {
+        (function() {
+            const name = prompt("Please enter the filtered name:");
+            if (!name) return;
 
-    // Function to handle Madame worklist filtering
-    function filterMadameWorklist(lowerCaseTarget) {
-        const buttons = Array.from(document.querySelectorAll('button[aria-label]'));
-        let found = false;
-        const originalStyles = new Map();
+            const nameLowerCase = name.toLowerCase().trim();
+            const buttons = Array.from(document.querySelectorAll('button[aria-label]'));
+            let found = false;
 
-        buttons.forEach(button => {
-            let parent = button;
-            let depth = 0;
-            while (parent && depth < 6) {
-                parent = parent.parentElement;
-                depth++;
+            buttons.forEach(button => {
+                let parent = button;
+                let depth = 0;
+
+                while (parent && depth < 6) {
+                    parent = parent.parentElement;
+                    depth++;
+                }
+
+                if (parent) {
+                    const siblingButtons = Array.from(parent.querySelectorAll('button[aria-label]'));
+                    const containsName = siblingButtons.some(siblingButton => {
+                        return siblingButton.getAttribute('aria-label').toLowerCase().includes(nameLowerCase);
+                    });
+
+                    if (containsName) {
+                        found = true;
+                    }
+                }
+            });
+
+            if (!found) {
+                alert("Not found in worklist");
+                return;
             }
-            if (parent && !originalStyles.has(parent)) {
-                originalStyles.set(parent, parent.style.display);
-                const siblingButtons = Array.from(parent.querySelectorAll('button[aria-label]'));
-                const containsName = siblingButtons.some(siblingButton =>
-                    siblingButton.getAttribute('aria-label').toLowerCase().includes(lowerCaseTarget)
-                );
-                parent.style.display = containsName ? '' : 'none';
-            }
-        });
 
-        if (!found) {
-            alert("Not found in worklist");
-            return;
-        }
+            const originalStyles = new Map();
+            buttons.forEach(button => {
+                let parent = button;
+                let depth = 0;
 
-        createFloatingResetDiv("Filtered by the name: " + targetName, originalStyles);
-    }
+                while (parent && depth < 6) {
+                    parent = parent.parentElement;
+                    depth++;
+                }
 
-    // Function to create floating reset div
-    function createFloatingResetDiv(message, originalStates) {
-        const floatingDiv = document.createElement('div');
-        floatingDiv.textContent = `${message} (click to reset)`;
-        Object.assign(floatingDiv.style, {
-            position: 'fixed',
-            bottom: '200px',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            backgroundColor: 'yellow',
-            color: 'black',
-            padding: '10px',
-            borderRadius: '5px',
-            fontSize: '16px',
-            zIndex: '9999',
-            cursor: 'pointer'
-        });
+                if (parent) {
+                    if (!originalStyles.has(parent)) {
+                        originalStyles.set(parent, parent.style.display);
+                    }
 
-        document.body.appendChild(floatingDiv);
-        floatingDiv.addEventListener('click', () => {
-            originalStates.forEach(({ row, display }) => row.style.display = display);
-            document.body.removeChild(floatingDiv);
-        });
+                    const siblingButtons = Array.from(parent.querySelectorAll('button[aria-label]'));
+                    const containsName = siblingButtons.some(siblingButton => {
+                        return siblingButton.getAttribute('aria-label').toLowerCase().includes(nameLowerCase);
+                    });
+
+                    if (containsName) {
+                        parent.style.display = '';
+                    } else {
+                        parent.style.display = 'none';
+                    }
+                }
+            });
+
+            const floatingDiv = document.createElement('div');
+            floatingDiv.style.position = 'fixed';
+            floatingDiv.style.bottom = '10px';
+            floatingDiv.style.left = '50%';
+            floatingDiv.style.transform = 'translateX(-50%)';
+            floatingDiv.style.backgroundColor = 'yellow';
+            floatingDiv.style.color = 'black';
+            floatingDiv.style.padding = '10px';
+            floatingDiv.style.borderRadius = '5px';
+            floatingDiv.style.fontSize = '16px';
+            floatingDiv.style.zIndex = '9999';
+            floatingDiv.style.cursor = 'pointer';
+            floatingDiv.innerHTML = 'Filtered by the name: ' + name + ' (Click to reset)';
+            document.body.appendChild(floatingDiv);
+
+            floatingDiv.addEventListener('click', () => {
+                originalStyles.forEach((originalStyle, element) => {
+                    element.style.display = originalStyle;
+                });
+                document.body.removeChild(floatingDiv);
+            });
+        })();
+    } else {
+        alert('This script only works on Fulcrum or Madame worklist pages');
     }
 
 })();
