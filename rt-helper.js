@@ -74,7 +74,7 @@
     });
 
     // Script 3: Filter a worklist by a name input
-    document.getElementById('runScript2').addEventListener('click', () => {
+    document.getElementById('runScript3').addEventListener('click', () => {
         if (!window.location.href.includes('matchmaker')) {
             alert('This script runs on Matchmaker result pages.');
             return;
