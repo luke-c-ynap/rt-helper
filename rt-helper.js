@@ -199,4 +199,41 @@
             (function() {
                 const targetName = prompt("Please enter the filtered name:");
                 if (!targetName) return;
-                const lowerCaseTarget = targetName.toLowerCase
+                const lowerCaseTarget = targetName.toLowerCase();
+                const rows = document.querySelectorAll('tr[data-row-id]');
+                rows.forEach(function(row) {
+                    const nameCell = row.querySelector('.name-cell');
+                    const name = nameCell ? nameCell.textContent.toLowerCase() : '';
+                    if (!name.includes(lowerCaseTarget)) {
+                        row.style.display = 'none';
+                    } else {
+                        row.style.display = '';
+                    }
+                });
+            })();
+        } else if (url.includes("madame")) {
+            (function() {
+                const targetName = prompt("Please enter the filtered name:");
+                if (!targetName) return;
+                const lowerCaseTarget = targetName.toLowerCase();
+                const rows = document.querySelectorAll('tr');
+                rows.forEach(function(row) {
+                    const nameCell = row.querySelector('td:nth-child(2)');
+                    const name = nameCell ? nameCell.textContent.toLowerCase() : '';
+                    if (!name.includes(lowerCaseTarget)) {
+                        row.style.display = 'none';
+                    } else {
+                        row.style.display = '';
+                    }
+                });
+            })();
+        } else {
+            alert("This script works on Fulcrum and Madame pages.");
+        }
+    });
+
+    // Script 8: To be implemented
+    document.getElementById('runScript8').addEventListener('click', () => {
+        alert('Script 8 functionality not implemented yet.');
+    });
+})();
