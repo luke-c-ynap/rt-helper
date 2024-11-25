@@ -78,69 +78,40 @@
         }
     });
 
-    // Script 3: Template Overlay - Add accessory template over every image
+    // Script 3: Place the accessory template over every image (Reverted back to original script)
     document.getElementById('runScript3').addEventListener('click', () => {
-        const overlayImageUrl = 'https://i.ibb.co/r3CL8MQ/Accessory-Template.png';
-        
-        const applyOverlay = () => {
-            const imageContainers = document.querySelectorAll('[class*="imageContainer"] img');
-            imageContainers.forEach(img => {
-                if (!img.closest('.overlay-wrapper')) {
-                    const wrapper = document.createElement('div');
-                    wrapper.className = 'overlay-wrapper';
-                    img.parentNode.insertBefore(wrapper, img);
-                    wrapper.appendChild(img);
+        if (!window.location.href.includes('matchmaker')) {
+            alert('This script runs on Matchmaker result pages.');
+            return;
+        }
+        const headerCells = document.querySelectorAll('th');
+        let columnIndex = -1;
+        for (let i = 0; i < headerCells.length; i++) {
+            if (headerCells[i].innerText.trim() === 'Product ID') {
+                columnIndex = i;
+                break;
+            }
+        }
+        if (columnIndex === -1) {
+            alert("No 'Product ID' column found.");
+            return;
+        }
+        const rows = document.querySelectorAll('tbody tr');
+        const productIDs = [];
+        rows.forEach(row => {
+            const cells = row.querySelectorAll('td');
+            if (cells.length > columnIndex) {
+                const productId = cells[columnIndex].innerText.trim();
+                if (/^\d{1,8}$/.test(productId)) {
+                    productIDs.push(productId);
                 }
-            });
-        };
-
-        if (window.customOverlayStyle) {
-            window.customOverlayStyle.remove();
-            document.querySelectorAll('.overlay-wrapper').forEach(wrapper => {
-                const img = wrapper.querySelector('img');
-                wrapper.replaceWith(img);
-            });
-            delete window.customOverlayStyle;
+            }
+        });
+        if (productIDs.length === 0) {
+            alert("No valid Product IDs found.");
         } else {
-            window.customOverlayStyle = document.createElement('style');
-            window.customOverlayStyle.innerHTML = `
-                .overlay-wrapper {
-                    position: relative;
-                    display: inline-block;
-                    width: 100%;
-                    height: 100%;
-                }
-                .overlay-wrapper::before {
-                    content: '';
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    background-image: url('${overlayImageUrl}');
-                    background-size: cover;
-                    opacity: 1;
-                    pointer-events: none;
-                    z-index: 1;
-                }
-                .overlay-wrapper img {
-                    display: block;
-                    width: 100%;
-                    height: 100%;
-                    position: relative;
-                    z-index: 0;
-                }
-            `;
-            document.head.appendChild(window.customOverlayStyle);
-            applyOverlay();
-
-            const observer = new MutationObserver(() => {
-                applyOverlay();
-            });
-
-            observer.observe(document.body, {
-                childList: true,
-                subtree: true
+            productIDs.forEach(id => {
+                window.open(`http://fulcrum.net-a-porter.com/photography/preview/${id}`, '_blank');
             });
         }
     });
@@ -159,4 +130,11 @@
     });
 
     document.getElementById('runScript7').addEventListener('click', () => {
-      
+        alert('Script 7 functionality not implemented yet.');
+    });
+
+    document.getElementById('runScript8').addEventListener('click', () => {
+        alert('Script 8 functionality not implemented yet.');
+    });
+
+})();
