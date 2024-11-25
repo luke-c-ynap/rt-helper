@@ -18,7 +18,7 @@
         <button id="runScript3" style="margin: 0 5px; padding: 5px 5px;">Filter Worklist by Name</button>
         <button id="runScript4" style="margin: 0 5px; padding: 5px 5px;">Toggle Template Overlay</button>
         <button id="runScript5" style="margin: 0 5px; padding: 5px 5px;">Open Personal VIDs</button>
-        <button id="runScript6" style="margin: 0 5px; padding: 5px 5px;">Open Validation Links</button>
+        <button id="runScript6" style="margin: 0 5px; padding: 5px 5px;">Open Validation Pages</button>
     `;
 
     // Append the footer to the body
@@ -292,7 +292,7 @@
         });
     });
 
-    // Script 6: Open Validation Links
+    // Script 6: Open Validation Links for all VIDs on a worklist or search page.
     document.getElementById('runScript6').addEventListener('click', () => {
         var currentUrl = window.location.href;
         if (currentUrl.startsWith("https://madame.ynap.biz/worklist/") || currentUrl.startsWith("https://madame.ynap.biz/search/")) {
