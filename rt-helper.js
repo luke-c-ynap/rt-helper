@@ -1,23 +1,23 @@
 (function() {
     // Create the footer menu
-const header = document.createElement('div');
-header.style.position = 'fixed';
-header.style.top = '0'; // Position it at the top
-header.style.left = '0';
-header.style.width = '100%';
-header.style.backgroundColor = '#333';
-header.style.color = 'white';
-header.style.textAlign = 'center';
-header.style.padding = '10px 0';
-header.style.zIndex = '1000';
-header.style.height = '50px'; // Define the header height
-header.style.boxSizing = 'border-box';
+ const footer = document.createElement('div');
+    footer.style.position = 'fixed';
+    footer.style.bottom = '0';
+    footer.style.left = '0';
+    footer.style.width = '100%';
+    footer.style.backgroundColor = '#333';
+    footer.style.color = 'white';
+    footer.style.textAlign = 'center';
+    footer.style.padding = '10px 0';
+    footer.style.zIndex = '1000';
+    footer.style.height = '50px'; // Define the footer height
+    footer.style.boxSizing = 'border-box';
 
-// Add padding to the body to prevent content overlap
-document.body.style.paddingTop = header.style.height; // Adjust top padding for the header
+    // Add padding to the body to prevent content overlap
+    document.body.style.paddingBottom = footer.style.height;
 
 // Add buttons to the header
-header.innerHTML = `
+footer.innerHTML = `
 <button id="runScript1" style="margin: 0 5px; padding: 5px 5px;" title="Swap between Retoucher and Validator modes in Madame">RT / VLDT</button>
 <button id="runScript2" style="margin: 0 5px; padding: 5px 5px;" title="Preview the MatchMaker PID results on Fulcrum">MM Prev</button>
 <button id="runScript3" style="margin: 0 5px; padding: 5px 5px;" title="Filter a Fulcrum/Madame worklist/search results by entering a name">Name Fil</button>
@@ -30,7 +30,7 @@ header.innerHTML = `
 `;
 
 // Append the header to the body
-document.body.appendChild(header);
+document.body.appendChild(footer);
 
 
     // Add click event listeners for the buttons
