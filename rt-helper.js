@@ -18,7 +18,7 @@
         <button id="runScript3" style="margin: 0 5px; padding: 5px 5px;">Filter Worklist by Name</button>
         <button id="runScript4" style="margin: 0 5px; padding: 5px 5px;">Toggle Template Overlay</button>
         <button id="runScript5" style="margin: 0 5px; padding: 5px 5px;">Open Personal VIDs</button>
-        <button id="runScript6" style="margin: 0 5px; padding: 5px 5px;">Open Validation Links</button> <!-- New Button -->
+        <button id="runScript6" style="margin: 0 5px; padding: 5px 5px;">Open Validation Links</button>
     `;
 
     // Append the footer to the body
