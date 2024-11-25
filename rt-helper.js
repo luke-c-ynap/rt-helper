@@ -157,8 +157,30 @@
         });
     });
 
+    // Script 5: Insert numbers from spans and trigger search
     document.getElementById('runScript5').addEventListener('click', () => {
-        alert('Script 5 functionality not implemented yet.');
+        try {
+            const spans = document.querySelectorAll('span');
+            let content = '';
+            spans.forEach(span => {
+                if (span.textContent.includes('/')) {
+                    content += span.textContent.replace(/[^0-9 ]/g, '');
+                }
+            });
+            content = content.trim();
+            const textarea = document.getElementById('search-by-id');
+            textarea.focus();
+            textarea.setSelectionRange(0, textarea.value.length);
+            document.execCommand('insertText', false, content);
+            const event = new Event('input', { bubbles: true });
+            textarea.dispatchEvent(event);
+            const searchButton = Array.from(document.querySelectorAll('button')).find(button => button.textContent.toLowerCase().includes('search'));
+            if (searchButton) {
+                searchButton.click();
+            }
+        } catch (error) {
+            console.error('Error:', error.message);
+        }
     });
 
     document.getElementById('runScript6').addEventListener('click', () => {
