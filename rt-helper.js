@@ -12,10 +12,10 @@
     footer.style.zIndex = '1000';
 
     // Add buttons to the footer
-    footer.innerHTML = 
+    footer.innerHTML = `
         <button id="runScript1" style="margin: 0 10px; padding: 5px 10px;">Toggle Retouching</button>
         <button id="runScript2" style="margin: 0 10px; padding: 5px 10px;">Open Product Previews</button>
-    ;
+    `;
 
     // Append the footer to the body
     document.body.appendChild(footer);
@@ -67,7 +67,7 @@
             alert("No valid Product IDs found.");
         } else {
             productIDs.forEach(id => {
-                window.open(http://fulcrum.net-a-porter.com/photography/preview/${id}, '_blank');
+                window.open(`http://fulcrum.net-a-porter.com/photography/preview/${id}`, '_blank');
             });
         }
     });
