@@ -192,12 +192,11 @@
         });
     });
 
+    // Script 7: Filter by Name (Fulcrum and Madame worklists)
     document.getElementById('runScript7').addEventListener('click', () => {
-        alert('Script 7 functionality not implemented yet.');
-    });
-
-    document.getElementById('runScript8').addEventListener('click', () => {
-        alert('Script 8 functionality not implemented yet.');
-    });
-
-})();
+        var url = window.location.href;
+        if (url.includes("fulcrum")) {
+            (function() {
+                const targetName = prompt("Please enter the filtered name:");
+                if (!targetName) return;
+                const lowerCaseTarget = targetName.toLowerCase
