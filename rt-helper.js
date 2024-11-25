@@ -16,7 +16,7 @@
         <button id="runScript1" style="margin: 0 5px; padding: 5px 5px;">RT / VLDT</button>
         <button id="runScript2" style="margin: 0 5px; padding: 5px 5px;">Open Matchmaker Previews</button>
         <button id="runScript3" style="margin: 0 5px; padding: 5px 5px;">Filter Worklist by Name</button>
-        <button id="runScript4" style="margin: 0 5px; padding: 5px 5px;">Toggle Image Overlay</button>
+        <button id="runScript4" style="margin: 0 5px; padding: 5px 5px;">Toggle Template Overlay</button>
     `;
 
     // Append the footer to the body
@@ -114,7 +114,7 @@
             floatingDiv.textContent = `Filtered by: ${targetName} (click to reset)`;
             Object.assign(floatingDiv.style, {
                 position: 'fixed',
-                bottom: '10px',
+                bottom: '50px',
                 left: '50%',
                 transform: 'translateX(-50%)',
                 backgroundColor: 'yellow',
@@ -180,7 +180,7 @@
             floatingDiv.textContent = `Filtered by: ${name} (click to reset)`;
             Object.assign(floatingDiv.style, {
                 position: 'fixed',
-                bottom: '10px',
+                bottom: '50px',
                 left: '50%',
                 transform: 'translateX(-50%)',
                 backgroundColor: 'yellow',
