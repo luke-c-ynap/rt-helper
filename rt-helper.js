@@ -28,7 +28,13 @@
     `;
 
     // Append the footer to the body
+    document.addEventListener('DOMContentLoaded', () => {
+    const footer = document.createElement('div');
+    footer.style.position = 'fixed';
+    ...
     document.body.appendChild(footer);
+});
+
 
     // Add click event listeners for the buttons
 
