@@ -31,7 +31,7 @@
         } else if (currentUrl.includes("retouching/")) {
             location.replace(currentUrl.replace("retouching/", "retouching-validation/"));
         } else {
-            alert('This script runs on pages with "retouching" or "retouching-validation" in the URL.');
+            alert('This script runs on Madame Retoucher or Retoucher Validation pages.');
         }
     });
 
