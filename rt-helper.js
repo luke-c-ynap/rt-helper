@@ -10,6 +10,11 @@
     footer.style.textAlign = 'center';
     footer.style.padding = '10px 0';
     footer.style.zIndex = '20000';
+    footer.style.height = '50px'; // Define the footer height
+    footer.style.boxSizing = 'border-box';
+
+    // Add padding to the body to prevent content overlap
+    document.body.style.paddingBottom = footer.style.height;
 
     // Add buttons to the footer
     footer.innerHTML = `
