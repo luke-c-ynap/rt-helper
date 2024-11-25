@@ -18,7 +18,7 @@
         <button id="runScript2" style="margin: 0 10px; padding: 5px 10px;">Open Matchmaker Previews</button>
         <button id="runScript3" style="margin: 0 10px; padding: 5px 10px;">Template Overlay</button>
         <button id="runScript4" style="margin: 0 10px; padding: 5px 10px;">Open Personal Area RT pages</button>
-        <button id="runScript5" style="margin: 0 10px; padding: 5px 10px;">Script 5</button>
+        <button id="runScript5" style="margin: 0 10px; padding: 5px 10px;">Refresh Search Page</button>
         <button id="runScript6" style="margin: 0 10px; padding: 5px 10px;">Script 6</button>
         <button id="runScript7" style="margin: 0 10px; padding: 5px 10px;">Script 7</button>
         <button id="runScript8" style="margin: 0 10px; padding: 5px 10px;">Script 8</button>
@@ -157,7 +157,7 @@
         });
     });
 
-    // Script 5: Insert numbers from spans and trigger search
+    // Script 5: Find VID numbers and use them to search again
     document.getElementById('runScript5').addEventListener('click', () => {
         try {
             const spans = document.querySelectorAll('span');
