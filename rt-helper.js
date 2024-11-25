@@ -10,13 +10,14 @@
     footer.style.textAlign = 'center';
     footer.style.padding = '10px 0';
     footer.style.zIndex = '1000';
+    footer.style.zIndex = '100';
 
     // Add buttons to the footer
     footer.innerHTML = `
         <button id="runScript1" style="margin: 0 10px; padding: 5px 10px;">RT/VLDT</button>
         <button id="runScript2" style="margin: 0 10px; padding: 5px 10px;">Open Matchmaker Previews</button>
         <button id="runScript3" style="margin: 0 10px; padding: 5px 10px;">Template Overlay</button>
-        <button id="runScript4" style="margin: 0 10px; padding: 5px 10px;">Script 4</button>
+        <button id="runScript4" style="margin: 0 10px; padding: 5px 10px;">Open Personal Area RT pages</button>
         <button id="runScript5" style="margin: 0 10px; padding: 5px 10px;">Script 5</button>
         <button id="runScript6" style="margin: 0 10px; padding: 5px 10px;">Script 6</button>
         <button id="runScript7" style="margin: 0 10px; padding: 5px 10px;">Script 7</button>
@@ -78,47 +79,82 @@
         }
     });
 
-    // Script 3: Place the accessory template over every image (Reverted back to original script)
+    // Script 3: Template Overlay - Add accessory overlay to images
     document.getElementById('runScript3').addEventListener('click', () => {
-        if (!window.location.href.includes('matchmaker')) {
-            alert('This script runs on Matchmaker result pages.');
-            return;
-        }
-        const headerCells = document.querySelectorAll('th');
-        let columnIndex = -1;
-        for (let i = 0; i < headerCells.length; i++) {
-            if (headerCells[i].innerText.trim() === 'Product ID') {
-                columnIndex = i;
-                break;
-            }
-        }
-        if (columnIndex === -1) {
-            alert("No 'Product ID' column found.");
-            return;
-        }
-        const rows = document.querySelectorAll('tbody tr');
-        const productIDs = [];
-        rows.forEach(row => {
-            const cells = row.querySelectorAll('td');
-            if (cells.length > columnIndex) {
-                const productId = cells[columnIndex].innerText.trim();
-                if (/^\d{1,8}$/.test(productId)) {
-                    productIDs.push(productId);
+        window.isActive = !window.isActive;
+        window.toggleOverlay = function() {
+            document.querySelectorAll('img[src], .panZoomImage').forEach(function(targetImage) {
+                var wrapper = targetImage.parentNode;
+                var overlayImage = wrapper.querySelector('.bookmarklet-overlay');
+
+                if (!overlayImage) {
+                    overlayImage = new Image();
+                    overlayImage.src = 'https://i.ibb.co/r3CL8MQ/Accessory-Template.png';
+                    overlayImage.classList.add('bookmarklet-overlay');
+                    overlayImage.style.position = 'absolute';
+                    overlayImage.style.top = '50%';
+                    overlayImage.style.left = '50%';
+                    overlayImage.style.transform = 'translate(-50%, -50%)';
+                    overlayImage.style.height = '100%';
+                    overlayImage.style.pointerEvents = 'none';
+                    overlayImage.style.opacity = '0';
+                    overlayImage.style.transition = 'opacity 0.3s ease';
+                    overlayImage.style.zIndex = '99';
+                    overlayImage.style.display = 'block';
+                    if (targetImage.classList.contains('panZoomImage')) {
+                        overlayImage.style.paddingBottom = '5px';
+                    }
+                    if (getComputedStyle(wrapper).position === 'static') {
+                        wrapper.style.position = 'relative';
+                    }
+                    wrapper.appendChild(overlayImage);
+                    wrapper.addEventListener('mouseenter', function() {
+                        if (window.isActive) overlayImage.style.opacity = '1';
+                    });
+                    wrapper.addEventListener('mouseleave', function() {
+                        overlayImage.style.opacity = '0';
+                    });
+                }
+
+                overlayImage.style.display = window.isActive ? 'block' : 'none';
+            });
+            document.querySelectorAll('.panZoomContainer__in').forEach(function(container) {
+                container.style.pointerEvents = window.isActive ? 'auto' : 'none';
+            });
+        };
+        window.toggleOverlay();
+
+        var observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                mutation.addedNodes.forEach(function(node) {
+                    if ((node.tagName === 'IMG' && node.src) || node.classList.contains('panZoomImage')) {
+                        window.toggleOverlay();
+                    }
+                });
+            });
+        });
+
+        observer.observe(document.body, { childList: true, subtree: true });
+    });
+
+    // Script 4: Open Personal Area retouching pages
+    document.getElementById('runScript4').addEventListener('click', () => {
+        const divs = document.querySelectorAll('div[aria-label]');
+        const openedUrls = new Set();
+
+        divs.forEach(div => {
+            const ariaLabel = div.getAttribute('aria-label');
+            const match = ariaLabel.match(/\d{10,19}/); // Match 10-19 digit numbers
+
+            if (match) {
+                const result = match[0];
+                if (!openedUrls.has(result)) {
+                    const newUrl = 'https://madame.ynap.biz/retouching/' + encodeURIComponent(result);
+                    window.open(newUrl, '_blank');
+                    openedUrls.add(result);
                 }
             }
         });
-        if (productIDs.length === 0) {
-            alert("No valid Product IDs found.");
-        } else {
-            productIDs.forEach(id => {
-                window.open(`http://fulcrum.net-a-porter.com/photography/preview/${id}`, '_blank');
-            });
-        }
-    });
-
-    // Placeholders for future scripts
-    document.getElementById('runScript4').addEventListener('click', () => {
-        alert('Script 4 functionality not implemented yet.');
     });
 
     document.getElementById('runScript5').addEventListener('click', () => {
