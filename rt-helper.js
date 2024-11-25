@@ -192,7 +192,7 @@
 
             const floatingDiv = document.createElement('div');
             floatingDiv.style.position = 'fixed';
-            floatingDiv.style.bottom = '10px';
+            floatingDiv.style.bottom = '113px';
             floatingDiv.style.left = '50%';
             floatingDiv.style.transform = 'translateX(-50%)';
             floatingDiv.style.backgroundColor = 'yellow';
@@ -200,7 +200,7 @@
             floatingDiv.style.padding = '10px';
             floatingDiv.style.borderRadius = '5px';
             floatingDiv.style.fontSize = '16px';
-            floatingDiv.style.zIndex = '9999';
+            floatingDiv.style.zIndex = '99999';
             floatingDiv.style.cursor = 'pointer';
             floatingDiv.innerHTML = 'Filtered by the name: ' + name + ' (Click to reset)';
             document.body.appendChild(floatingDiv);
