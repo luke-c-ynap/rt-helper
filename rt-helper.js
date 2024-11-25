@@ -19,6 +19,7 @@
         <button id="runScript4" style="margin: 0 5px; padding: 5px 5px;">Toggle Template Overlay</button>
         <button id="runScript5" style="margin: 0 5px; padding: 5px 5px;">Open Personal VIDs</button>
         <button id="runScript6" style="margin: 0 5px; padding: 5px 5px;">Open Validation Pages</button>
+        <button id="runScript7" style="margin: 0 5px; padding: 5px 5px;">Populate Search</button>
     `;
 
     // Append the footer to the body
@@ -308,4 +309,39 @@
         }
     });
 
+ // Script 7: Populate Search field and trigger search
+    document.getElementById('runScript7').addEventListener('click', () => {
+        if (!window.location.href.startsWith('https://madame.ynap.biz/search')) {
+            alert('This script works on Madame Search pages');
+            return;
+        }
+
+        try {
+            const spans = document.querySelectorAll('span');
+            let content = '';
+            spans.forEach(span => {
+                if (span.textContent.includes('/')) {
+                    content += span.textContent.replace(/[^0-9 ]/g, '');
+                }
+            });
+            content = content.trim();
+
+            const textarea = document.getElementById('search-by-id');
+            textarea.focus();
+            textarea.setSelectionRange(0, textarea.value.length);
+            document.execCommand('insertText', false, content);
+
+            const event = new Event('input', { bubbles: true });
+            textarea.dispatchEvent(event);
+
+            const searchButton = Array.from(document.querySelectorAll('button')).find(button =>
+                button.textContent.toLowerCase().includes('search')
+            );
+            if (searchButton) {
+                searchButton.click();
+            }
+        } catch (error) {
+            console.error('Error:', error.message);
+        }
+    });
 })();
