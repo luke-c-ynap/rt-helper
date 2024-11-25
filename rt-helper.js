@@ -1,14 +1,3 @@
-// ==UserScript==
-// @name         RT HELPER MENU
-// @namespace    http://tampermonkey.net/
-// @version      1.0
-// @description  Floating footer menu, to help retouchers navigate fulcrum and madame
-// @author       YourName
-// @match        *://*madame*/*
-// @match        *://*fulcrum*/*
-// @match        *://*matchmaker*/*
-// @grant        none
-// ==/UserScript==
 
 (function() {
     // Create the footer menu
