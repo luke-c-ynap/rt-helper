@@ -25,6 +25,7 @@
 <button id="runScript5" style="margin: 0 5px; padding: 5px 5px;" title="Open the Retouch pages for all VIDs in your Madame personal area">P.A VIDs</button>
 <button id="runScript6" style="margin: 0 5px; padding: 5px 5px;" title="Open Validator pages for all the VIDs on this Madame page">Open Vals</button>
 <button id="runScript7" style="margin: 0 5px; padding: 5px 5px;" title="Refresh the Madame search results">ReSearch</button>
+<button id="runScript7" style="margin: 0 5px; padding: 5px 5px;" title="Instantly hide all annoying Madame popups">Go away</button>
 
     `;
 
@@ -350,4 +351,15 @@ document.getElementById('runScript3').addEventListener('click', () => {
             console.error('Error:', error.message);
         }
     });
+
+    // Script 8: Hide Toast Notifications
+    document.getElementById('runScript8').addEventListener('click', () => {
+        document.querySelectorAll('div[class*="Toastify"]').forEach(el => {
+            el.style.setProperty('display', 'none', 'important');
+            el.style.setProperty('visibility', 'hidden', 'important');
+            el.style.setProperty('opacity', '0', 'important');
+        });
+    });
+
+
 })();
