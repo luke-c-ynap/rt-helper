@@ -9,7 +9,7 @@
     footer.style.color = 'white';
     footer.style.textAlign = 'center';
     footer.style.padding = '10px 0';
-    footer.style.zIndex = '1000';
+    footer.style.zIndex = '900';
     footer.style.height = '50px'; // Define the footer height
     footer.style.boxSizing = 'border-box';
 
