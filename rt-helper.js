@@ -235,7 +235,7 @@ document.getElementById('runScript3').addEventListener('click', () => {
                     overlayImage.style.pointerEvents = 'none';
                     overlayImage.style.opacity = '0';
                     overlayImage.style.transition = 'opacity 0.3s ease';
-                    overlayImage.style.zIndex = '999999';
+                    overlayImage.style.zIndex = '999';
                     overlayImage.style.display = 'block';
                     if (targetImage.classList.contains('panZoomImage')) {
                         overlayImage.style.paddingBottom = '5px';
