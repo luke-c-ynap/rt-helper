@@ -26,6 +26,7 @@ header.innerHTML = `
 <button id="runScript6" style="margin: 0 5px; padding: 5px 5px;" title="Open Validator pages for all the VIDs on this Madame page">Open Vals</button>
 <button id="runScript7" style="margin: 0 5px; padding: 5px 5px;" title="Refresh the Madame search results">ReSearch</button>
 <button id="runScript8" style="margin: 0 5px; padding: 5px 5px;" title="Hide Toastify notifications">Hide Toasts</button>
+<button id="runScript9" style="margin: 0 5px; padding: 5px 5px;" title="Nice">;)</button>
 `;
 
 // Append the header to the body
@@ -359,6 +360,35 @@ document.getElementById('runScript3').addEventListener('click', () => {
             el.style.setProperty('visibility', 'hidden', 'important');
             el.style.setProperty('opacity', '0', 'important');
         });
+    });
+
+    // Script 9: hehehehe
+    document.getElementById('runScript8').addEventListener('click', () => {
+  const cursorUrl = 'https://i.ibb.co/sCsnqDr/Tom-baby2.png';
+    const styleId = 'custom-cursor-style';
+
+    // Check if the style already exists
+    const existingStyle = document.getElementById(styleId);
+    if (existingStyle) {
+        existingStyle.remove(); // Remove the style to revert back to default
+    } else {
+        // Define custom cursor CSS
+        const css = `
+            * {
+                cursor: url(${cursorUrl}), auto !important;
+            }
+            a, button, input, textarea, select, [type="text"], 
+            [type="number"], [type="email"], [type="password"] {
+                cursor: url(${cursorUrl}), auto !important;
+            }
+        `;
+
+        // Create and append the style element
+        const style = document.createElement('style');
+        style.id = styleId;
+        style.textContent = css;
+        document.head.appendChild(style);
+    }
     });
 
 
