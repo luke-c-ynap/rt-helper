@@ -20,25 +20,25 @@
     // Add a style block for the button styles
     const style = document.createElement('style');
     style.textContent = `
-        .rt-helper-button {
-            background-color: #768d87;
-            display: inline-block;
-            cursor: pointer;
-            color: #ffffff;
-            font-family: Courier New, monospace;
-            font-size: 13px;
-            padding: 5px 8px;
-            text-decoration: none;
-            border: none;
-            outline: none;
-        }
-        .rt-helper-button:hover {
-            background-color: #6c7c7c;
-        }
-        .rt-helper-button:active {
-            position: relative;
-            top: 1px;
-        }
+       .rt-helper-button {
+	background-color: #7a7a7a;
+	display: inline-block;
+	cursor: pointer;
+	color: #ffffff;
+	font-family: Courier New;
+	font-size: 13px;
+	font-weight: bold;
+	padding:5px 8px;
+	text-decoration: none;
+}
+.rt-helper-button:hover {
+	background-color: #616161;
+}
+.rt-helper-button:active {
+	position: relative;
+	top: 1px;
+}
+
     `;
     document.head.appendChild(style);
 
