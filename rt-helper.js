@@ -317,7 +317,7 @@
  // Script 7: Populate Search field and trigger search
     document.getElementById('runScript7').addEventListener('click', () => {
         if (!window.location.href.startsWith('https://madame.ynap.biz/search')) {
-            alert('This script works on Madame Search pages');
+            alert('This script works on Madame search pages');
             return;
         }
 
