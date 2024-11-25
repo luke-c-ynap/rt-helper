@@ -113,7 +113,7 @@ document.getElementById('runScript3').addEventListener('click', () => {
         floatingDiv.textContent = `Filtered by: ${targetName} (click to reset)`;
         Object.assign(floatingDiv.style, {
             position: 'fixed',
-            bottom: '100px',
+            bottom: '50px',
             left: '50%',
             transform: 'translateX(-50%)',
             backgroundColor: 'yellow',
