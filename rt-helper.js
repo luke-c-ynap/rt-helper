@@ -78,61 +78,71 @@
         }
     });
 
-    // Script 3: Toggle accessory template overlay on all images
+    // Script 3: Template Overlay - Add accessory template over every image
     document.getElementById('runScript3').addEventListener('click', () => {
-        window.isActive = !window.isActive;
-        window.toggleOverlay = function() {
-            document.querySelectorAll('img[src], .panZoomImage').forEach(function(targetImage) {
-                var wrapper = targetImage.parentNode;
-                var overlayImage = wrapper.querySelector('.bookmarklet-overlay');
-
-                if (!overlayImage) {
-                    overlayImage = new Image();
-                    overlayImage.src = 'https://i.ibb.co/r3CL8MQ/Accessory-Template.png';
-                    overlayImage.classList.add('bookmarklet-overlay');
-                    overlayImage.style.position = 'absolute';
-                    overlayImage.style.top = '50%';
-                    overlayImage.style.left = '50%';
-                    overlayImage.style.transform = 'translate(-50%, -50%)';
-                    overlayImage.style.height = '100%';
-                    overlayImage.style.pointerEvents = 'none';
-                    overlayImage.style.opacity = '0';
-                    overlayImage.style.transition = 'opacity 0.3s ease';
-                    overlayImage.style.zIndex = '999999';
-                    overlayImage.style.display = 'block';
-                    if (targetImage.classList.contains('panZoomImage')) {
-                        overlayImage.style.paddingBottom = '5px';
-                    }
-                    if (getComputedStyle(wrapper).position === 'static') {
-                        wrapper.style.position = 'relative';
-                    }
-                    wrapper.appendChild(overlayImage);
-                    wrapper.addEventListener('mouseenter', function() {
-                        if (window.isActive) overlayImage.style.opacity = '1';
-                    });
-                    wrapper.addEventListener('mouseleave', function() {
-                        overlayImage.style.opacity = '0';
-                    });
+        const overlayImageUrl = 'https://i.ibb.co/r3CL8MQ/Accessory-Template.png';
+        
+        const applyOverlay = () => {
+            const imageContainers = document.querySelectorAll('[class*="imageContainer"] img');
+            imageContainers.forEach(img => {
+                if (!img.closest('.overlay-wrapper')) {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'overlay-wrapper';
+                    img.parentNode.insertBefore(wrapper, img);
+                    wrapper.appendChild(img);
                 }
-                overlayImage.style.display = window.isActive ? 'block' : 'none';
-            });
-            document.querySelectorAll('.panZoomContainer__in').forEach(function(container) {
-                container.style.pointerEvents = window.isActive ? 'auto' : 'none';
             });
         };
-        window.toggleOverlay();
 
-        var observer = new MutationObserver(function(mutations) {
-            mutations.forEach(function(mutation) {
-                mutation.addedNodes.forEach(function(node) {
-                    if ((node.tagName === 'IMG' && node.src) || node.classList.contains('panZoomImage')) {
-                        window.toggleOverlay();
-                    }
-                });
+        if (window.customOverlayStyle) {
+            window.customOverlayStyle.remove();
+            document.querySelectorAll('.overlay-wrapper').forEach(wrapper => {
+                const img = wrapper.querySelector('img');
+                wrapper.replaceWith(img);
             });
-        });
+            delete window.customOverlayStyle;
+        } else {
+            window.customOverlayStyle = document.createElement('style');
+            window.customOverlayStyle.innerHTML = `
+                .overlay-wrapper {
+                    position: relative;
+                    display: inline-block;
+                    width: 100%;
+                    height: 100%;
+                }
+                .overlay-wrapper::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-image: url('${overlayImageUrl}');
+                    background-size: cover;
+                    opacity: 1;
+                    pointer-events: none;
+                    z-index: 1;
+                }
+                .overlay-wrapper img {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    position: relative;
+                    z-index: 0;
+                }
+            `;
+            document.head.appendChild(window.customOverlayStyle);
+            applyOverlay();
 
-        observer.observe(document.body, { childList: true, subtree: true });
+            const observer = new MutationObserver(() => {
+                applyOverlay();
+            });
+
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+        }
     });
 
     // Placeholders for future scripts
@@ -149,11 +159,4 @@
     });
 
     document.getElementById('runScript7').addEventListener('click', () => {
-        alert('Script 7 functionality not implemented yet.');
-    });
-
-    document.getElementById('runScript8').addEventListener('click', () => {
-        alert('Script 8 functionality not implemented yet.');
-    });
-
-})();
+      
