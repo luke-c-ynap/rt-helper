@@ -20,7 +20,7 @@
         <button id="runScript4" style="margin: 0 10px; padding: 5px 10px;">Open Personal Area RT Pages</button>
         <button id="runScript5" style="margin: 0 10px; padding: 5px 10px;">Refresh Search</button>
         <button id="runScript6" style="margin: 0 10px; padding: 5px 10px;">Nuke Popups</button>
-        <button id="runScript7" style="margin: 0 10px; padding: 5px 10px;">Script 7</button>
+        <button id="runScript7" style="margin: 0 10px; padding: 5px 10px;">Worklist Name Filter</button>
         <button id="runScript8" style="margin: 0 10px; padding: 5px 10px;">Script 8</button>
     `;
 
