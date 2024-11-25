@@ -17,7 +17,7 @@
         <button id="runScript2" style="margin: 0 5px; padding: 5px 5px;">Open Matchmaker Previews</button>
         <button id="runScript3" style="margin: 0 5px; padding: 5px 5px;">Filter Worklist by Name</button>
         <button id="runScript4" style="margin: 0 5px; padding: 5px 5px;">Toggle Template Overlay</button>
-        <button id="runScript5" style="margin: 0 5px; padding: 5px 5px;">Open Madame URLs</button>
+        <button id="runScript5" style="margin: 0 5px; padding: 5px 5px;">Open Personal VIDs</button>
     `;
 
     // Append the footer to the body
@@ -267,22 +267,28 @@
         observer.observe(document.body, { childList: true, subtree: true });
     });
 
-    // Script 5: Open Madame URLs for matching Product IDs
-    document.getElementById('runScript5').addEventListener('click', () => {
-        const divs = document.querySelectorAll('div[aria-label]');
-        const openedUrls = new Set();
-        divs.forEach(div => {
-            const ariaLabel = div.getAttribute('aria-label');
-            const match = ariaLabel.match(/\d{10,19}/);
-            if (match) {
-                const result = match[0];
-                if (!openedUrls.has(result)) {
-                    const newUrl = 'https://madame.ynap.biz/retouching/' + encodeURIComponent(result);
-                    window.open(newUrl, '_blank');
-                    openedUrls.add(result);
-                }
+// Script 5: Open Madame URLs for matching Product IDs
+document.getElementById('runScript5').addEventListener('click', () => {
+    // Check if the current URL starts with "https://madame.ynap.biz/retouching/"
+    if (!window.location.href.startsWith('https://madame.ynap.biz/retouching/')) {
+        alert('This script works on Retoucher pages, with images in the Personal Area');
+        return;
+    }
+
+    const divs = document.querySelectorAll('div[aria-label]');
+    const openedUrls = new Set();
+    divs.forEach(div => {
+        const ariaLabel = div.getAttribute('aria-label');
+        const match = ariaLabel.match(/\d{10,19}/);
+        if (match) {
+            const result = match[0];
+            if (!openedUrls.has(result)) {
+                const newUrl = 'https://madame.ynap.biz/retouching/' + encodeURIComponent(result);
+                window.open(newUrl, '_blank');
+                openedUrls.add(result);
             }
-        });
+        }
     });
+});
 
 })();
