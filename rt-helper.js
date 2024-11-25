@@ -1,6 +1,7 @@
 (function() {
-    // Create the footer menu
- const footer = document.createElement('div');
+
+    // Create and style the footer
+    const footer = document.createElement('div');
     footer.style.position = 'fixed';
     footer.style.bottom = '0';
     footer.style.left = '0';
@@ -16,22 +17,46 @@
     // Add padding to the body to prevent content overlap
     document.body.style.paddingBottom = footer.style.height;
 
-// Add buttons to the header
-footer.innerHTML = `
-<button id="runScript1" style="margin: 0 5px; padding: 5px 5px;" title="Swap between Retoucher and Validator modes in Madame">RT / VLDT</button>
-<button id="runScript2" style="margin: 0 5px; padding: 5px 5px;" title="Preview the MatchMaker PID results on Fulcrum">MM Prev</button>
-<button id="runScript3" style="margin: 0 5px; padding: 5px 5px;" title="Filter a Fulcrum/Madame worklist/search results by entering a name">Name Fil</button>
-<button id="runScript4" style="margin: 0 5px; padding: 5px 5px;" title="Toggle the alignment template on Madame previews">Template</button>
-<button id="runScript5" style="margin: 0 5px; padding: 5px 5px;" title="Open the Retouch pages for all VIDs in your Madame personal area">P.A VIDs</button>
-<button id="runScript6" style="margin: 0 5px; padding: 5px 5px;" title="Open Validator pages for all the VIDs on this Madame page">Open Vals</button>
-<button id="runScript7" style="margin: 0 5px; padding: 5px 5px;" title="Refresh the Madame search results">ReSearch</button>
-<button id="runScript8" style="margin: 0 5px; padding: 5px 5px;" title="Instantly kill pop up notifications on Madame">Go Away</button>
-<button id="runScript9" style="margin: 0 5px; padding: 5px 5px;" title="Nice">;)</button>
-`;
+    // Add a style block for the button styles
+    const style = document.createElement('style');
+    style.textContent = `
+        .rt-helper-button {
+            background-color: #768d87;
+            display: inline-block;
+            cursor: pointer;
+            color: #ffffff;
+            font-family: Courier New, monospace;
+            font-size: 13px;
+            padding: 5px 8px;
+            text-decoration: none;
+            border: none;
+            outline: none;
+        }
+        .rt-helper-button:hover {
+            background-color: #6c7c7c;
+        }
+        .rt-helper-button:active {
+            position: relative;
+            top: 1px;
+        }
+    `;
+    document.head.appendChild(style);
 
-// Append the header to the body
-document.body.appendChild(footer);
+    // Add buttons to the footer
+    footer.innerHTML = `
+        <button id="runScript1" class="rt-helper-button" title="Swap between Retoucher and Validator modes in Madame">RT / VLDT</button>
+        <button id="runScript2" class="rt-helper-button" title="Preview the MatchMaker PID results on Fulcrum">MM Prev</button>
+        <button id="runScript3" class="rt-helper-button" title="Filter a Fulcrum/Madame worklist/search results by entering a name">Name Fil</button>
+        <button id="runScript4" class="rt-helper-button" title="Toggle the alignment template on Madame previews">Template</button>
+        <button id="runScript5" class="rt-helper-button" title="Open the Retouch pages for all VIDs in your Madame personal area">P.A VIDs</button>
+        <button id="runScript6" class="rt-helper-button" title="Open Validator pages for all the VIDs on this Madame page">Open Vals</button>
+        <button id="runScript7" class="rt-helper-button" title="Refresh the Madame search results">ReSearch</button>
+        <button id="runScript8" class="rt-helper-button" title="Instantly kill pop up notifications on Madame">Go Away</button>
+        <button id="runScript9" class="rt-helper-button" title="Nice">;)</button>
+    `;
 
+    // Append the footer to the body
+    document.body.appendChild(footer);
 
     // Add click event listeners for the buttons
 
