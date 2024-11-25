@@ -19,7 +19,7 @@
         <button id="runScript4" style="margin: 0 5px; padding: 5px 5px;">Toggle Template Overlay</button>
         <button id="runScript5" style="margin: 0 5px; padding: 5px 5px;">Open Personal VIDs</button>
         <button id="runScript6" style="margin: 0 5px; padding: 5px 5px;">Open Validation Pages</button>
-        <button id="runScript7" style="margin: 0 5px; padding: 5px 5px;">Populate Search</button>
+        <button id="runScript7" style="margin: 0 5px; padding: 5px 5px;">Refresh Search</button>
     `;
 
     // Append the footer to the body
