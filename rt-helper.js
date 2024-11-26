@@ -25,9 +25,9 @@
 	display: inline-block;
 	cursor: pointer;
 	color: #ffffff;
-	font-family -apple-system, "system-ui", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-        font-size 14px;
-        font-weight 400;
+	font-family: -apple-system, "system-ui", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        font-size: 14px;
+        font-weight: 400;
 	padding:5px 8px;
 	text-decoration: none;
 }
