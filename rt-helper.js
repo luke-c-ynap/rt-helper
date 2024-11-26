@@ -44,7 +44,7 @@
     // Add buttons to the footer
     footer.innerHTML = `
         <button id="runScript1" class="rt-helper-button" data-domain="madame.ynap.biz" title="Swap between Retoucher and Validator modes in Madame">RT / VLDT</button>
-        <button id="runScript2" class="rt-helper-button" data-domain="fulcrum.net-a-porter.com" title="Preview the MatchMaker PID results on Fulcrum">MM Prev</button>
+        <button id="runScript2" class="rt-helper-button" data-domain="matchmaker.product.ynapgroup.com/" title="Preview the MatchMaker PID results on Fulcrum">MM Prev</button>
         <button id="runScript3" class="rt-helper-button" data-domain="fulcrum.net-a-porter.com,madame.ynap.biz" title="Filter a Fulcrum/Madame worklist/search results by entering a name">Name Fil</button>
         <button id="runScript4" class="rt-helper-button" data-domain="madame.ynap.biz" title="Toggle the alignment template on Madame previews">Template</button>
         <button id="runScript5" class="rt-helper-button" data-domain="madame.ynap.biz" title="Open the Retouch pages for all VIDs in your Madame personal area">P.A VIDs</button>
