@@ -1,5 +1,4 @@
-(function() {
-
+(function () {
     // Create and style the footer
     const footer = document.createElement('div');
     footer.style.position = 'fixed';
@@ -21,42 +20,51 @@
     const style = document.createElement('style');
     style.textContent = `
        .rt-helper-button {
-	background-color: #7a7a7a;
-	display: inline-block;
-	cursor: pointer;
-	color: #ffffff;
-	font-family: -apple-system, "system-ui", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-        font-size: 14px;
-        font-weight: 400;
-	padding:5px 8px;
-	text-decoration: none;
-}
-.rt-helper-button:hover {
-	background-color: #616161;
-}
-.rt-helper-button:active {
-	position: relative;
-	top: 1px;
-}
-
+           background-color: #7a7a7a;
+           display: inline-block;
+           cursor: pointer;
+           color: #ffffff;
+           font-family: -apple-system, "system-ui", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+           font-size: 14px;
+           font-weight: 400;
+           padding: 5px 8px;
+           text-decoration: none;
+           margin: 0 5px;
+       }
+       .rt-helper-button:hover {
+           background-color: #616161;
+       }
+       .rt-helper-button:active {
+           position: relative;
+           top: 1px;
+       }
     `;
     document.head.appendChild(style);
 
     // Add buttons to the footer
     footer.innerHTML = `
-        <button id="runScript1" class="rt-helper-button" title="Swap between Retoucher and Validator modes in Madame">RT / VLDT</button>
-        <button id="runScript2" class="rt-helper-button" title="Preview the MatchMaker PID results on Fulcrum">MM Prev</button>
-        <button id="runScript3" class="rt-helper-button" title="Filter a Fulcrum/Madame worklist/search results by entering a name">Name Fil</button>
-        <button id="runScript4" class="rt-helper-button" title="Toggle the alignment template on Madame previews">Template</button>
-        <button id="runScript5" class="rt-helper-button" title="Open the Retouch pages for all VIDs in your Madame personal area">P.A VIDs</button>
-        <button id="runScript6" class="rt-helper-button" title="Open Validator pages for all the VIDs on this Madame page">Open Vals</button>
-        <button id="runScript7" class="rt-helper-button" title="Refresh the Madame search results">ReSearch</button>
-        <button id="runScript8" class="rt-helper-button" title="Instantly kill pop up notifications on Madame">Go Away</button>
-        <button id="runScript9" class="rt-helper-button" title="Nice">;)</button>
+        <button id="runScript1" class="rt-helper-button" data-domain="madame.ynap.biz" title="Swap between Retoucher and Validator modes in Madame">RT / VLDT</button>
+        <button id="runScript2" class="rt-helper-button" data-domain="fulcrum.net-a-porter.com" title="Preview the MatchMaker PID results on Fulcrum">MM Prev</button>
+        <button id="runScript3" class="rt-helper-button" data-domain="fulcrum.net-a-porter.com,madame.ynap.biz" title="Filter a Fulcrum/Madame worklist/search results by entering a name">Name Fil</button>
+        <button id="runScript4" class="rt-helper-button" data-domain="madame.ynap.biz" title="Toggle the alignment template on Madame previews">Template</button>
+        <button id="runScript5" class="rt-helper-button" data-domain="madame.ynap.biz" title="Open the Retouch pages for all VIDs in your Madame personal area">P.A VIDs</button>
+        <button id="runScript6" class="rt-helper-button" data-domain="madame.ynap.biz" title="Open Validator pages for all the VIDs on this Madame page">Open Vals</button>
+        <button id="runScript7" class="rt-helper-button" data-domain="madame.ynap.biz" title="Refresh the Madame search results">ReSearch</button>
+        <button id="runScript8" class="rt-helper-button" data-domain="madame.ynap.biz" title="Instantly kill pop up notifications on Madame">Go Away</button>
+        <button id="runScript9" class="rt-helper-button" data-domain="*" title="Nice">;)</button>
     `;
 
     // Append the footer to the body
     document.body.appendChild(footer);
+
+    // Hide or show buttons based on the current domain
+    const currentDomain = window.location.hostname;
+    document.querySelectorAll('.rt-helper-button').forEach(button => {
+        const domains = button.getAttribute('data-domain').split(',');
+        if (!domains.includes(currentDomain) && !domains.includes('*')) {
+            button.style.display = 'none';
+        }
+    });
 
     // Add click event listeners for the buttons
 
